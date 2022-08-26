@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="d-flex align-items-center justify-content-center">
+        <img src="/assets/imgs/smerch-logo.png">
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <p style="color: #727D97; font-size: 20px;">Search and explore NFTs contract</p>
+      </div>
+      <form role="form" [formGroup]="searchForm">
+        <div class="d-flex align-items-center justify-content-center" style="margin: 10px;">
+          <input formControlName="contractAddress" type="text" class="form-control" id="" placeholder="" style="width: 520px; font-size: 20px; border-radius: 30px;">
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+          <button #searchBtnEl  (click)="contractAssets()" class="search-btn" style="">Search contract</button>
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+        	<div #response style="width: 400px; margin-top: 20px;"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- *ngIf="appsViewSec" -->
+<div class="container" style="margin-top: 30px;" *ngIf="assetsView">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let asset of serverData?.assets" (click)="assetSelected(asset.asset_contract.address,asset.token_id)">
+      <div style="border-radius: 10px; margin: 20px 0 20px 0; background-color: #395284; text-align: center; border-bottom: 3px solid #ccc; cursor: pointer; height: 200px;">
+      	<div style="height: 160px; overflow: hidden;">
+	        <img src="{{asset.image_preview_url}}" class="img-fluid">
+      	</div>
+        <div style="text-align: center; height: 70px; background: #28395C; color: #fff; padding: 10px; border-radius: 0 0 10px 10px;">
+              <span class="badge text-bg-light">#{{ (asset.token_id.length>6)? (asset.token_id | slice:0:6)+'..':(asset.token_id) }}</span><br>
+          <span>{{ (asset.name.length>20)? (asset.name | slice:0:20)+'..':(asset.name) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>        
+</div>
+
+<div class="container" style="margin-top: 30px; margin-bottom: 30px;" *ngIf="assetView">
+  <div class="row">
+    <div class="col-md-4" style="background: yellow;" style="padding: 0;">
+      <img src="{{asset.image_url}}" class="img-fluid">
+    </div>
+    <div class="col-md-8" style="background: #28395C; color: #858CA0; padding: 20px;">
+      <h2 style="color: #fff; font-size: 24px;">{{asset.name}} #{{ (asset.token_id.length>6)? (asset.token_id | slice:0:6)+'..':(asset.token_id) }}</h2>
+        <div class="row">
+          <div class="col-md-12">
+            <div style="background: #1D2842; border-radius: 5px; float: left; padding: 5px; margin: 5px;">
+              <span style="text-transform: capitalize; color:#979EB0; font-size: 9px;">BACKGROUND</span>
+              <p style="color: #5B637E; font-size: 12px;">Green (8.79%)</p>
+            </div>
+            <div style="background: #1D2842; border-radius: 5px; float: left; padding: 5px; margin: 5px;">
+              <span style="text-transform: capitalize; color:#979EB0; font-size: 9px;">SKIN</span>
+              <p style="color: #5B637E; font-size: 12px;">Gargoyle Purple (9.02%)</p>
+            </div>
+            <div style="background: #1D2842; border-radius: 5px; float: left; padding: 5px; margin: 5px;">
+              <span style="text-transform: capitalize; color:#979EB0; font-size: 9px;">EYES</span>
+              <p style="color: #5B637E; font-size: 12px;">Chinese (9.7%)</p>
+            </div>
+            <div style="background: #1D2842; border-radius: 5px; float: left; padding: 5px; margin: 5px;">
+              <span style="text-transform: capitalize; color:#979EB0; font-size: 9px;">NECK</span>
+              <p style="color: #5B637E; font-size: 12px;">Gold Chain (10.03%)</p>
+            </div>
+            <div style="background: #1D2842; border-radius: 5px; float: left; padding: 5px; margin: 5px;">
+              <span style="text-transform: capitalize; color:#979EB0; font-size: 9px;">HEAD</span>
+              <p style="color: #5B637E; font-size: 12px;">None (67.76%)</p>
+            </div>
+            <div style="background: #1D2842; border-radius: 5px; float: left; padding: 5px; margin: 5px;">
+              <span style="text-transform: capitalize; color:#979EB0; font-size: 9px;">MOUTH</span>
+              <p style="color: #5B637E; font-size: 12px;">Poison (6.43%)</p>
+            </div>
+          </div>
+        </div>
+        <p>{{asset.description}}</p>
+        <button class="price-btn" style="font-size: 14px;" (click)="printProducts(asset.asset_contract.address,asset.token_id)">
+        	<img src="{{asset.collection.payment_tokens[0].image_url}}" width="20px">
+        {{asset.collection.payment_tokens[0].eth_price}} {{asset.collection.payment_tokens[0].symbol}}</button><br><br>
+        <!-- <button class="btn btn-sm btn-light" style="font-size: 14px;" (click)="printProducts(asset.asset_contract.address,asset.token_id)">PRINTFUL</button> -->
+      <!-- <span class="badge text-bg-light">ETH 1.00</span> -->
+    </div>
+  </div>        
+</div>

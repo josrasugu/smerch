@@ -1,0 +1,22 @@
+<div #mockupGenerationFeed>
+	<p style="font-size: 20px;"><span #generateIconEl class="fa fa-spinner fa-spin"></span>&nbsp;&nbsp;<span #generateTextEl>Generating mockup...</span></p>
+</div>
+<div mat-dialog-content>
+
+</div>
+
+<div class="row">
+	<div class="col-md-8" align="center">
+		<div style="height:550px;overflow:scroll" >
+			<div *ngFor="let mockup of serverData?.result.mockups" style="padding: 20px;">
+				<img  src="{{mockup.mockup_url}}" class="img-fluid">
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4" align="center">
+		<button class="btn btn-info" style="margin: 10px 10px 0 0;">Save design</button>
+		<button class="btn btn-info" style="margin: 10px 10px 0 0;">Place print order</button>  
+	</div>
+
+
+</div>

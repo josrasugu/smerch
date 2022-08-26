@@ -1,0 +1,22 @@
+.search-btn{
+	margin-top: 20px; 
+	background-image: linear-gradient(to right top, #192339, #005785, #0092aa, #00cc8b, #54fd00);
+	border: none;
+	color:  #fff;
+	border-radius: 20px;
+	padding: 20px;
+	font-size: 22px;
+}
+.search-btn:hover{
+	background-image: linear-gradient(to right top, #1a3163, #0067ab, #009ec1, #00d292, #54fd00);
+}
+
+.price-btn{
+	margin-top: 20px; 
+	background-image: linear-gradient(to right top, #54fd00, #00d292, #009ec1, #0067ab, #1a3163);
+	border: none;
+	color:  #fff;
+	border-radius: 20px;
+	padding: 10px;
+	font-size: 22px;
+}

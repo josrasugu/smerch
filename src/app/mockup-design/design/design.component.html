@@ -1,0 +1,84 @@
+<div class="container" style="background-color: #fff; min-height: 500px; padding: 20px;">
+	<div class="row">
+	  <div class="col-md-6 col-sm-6">
+	  	<div class="row">
+	  		<form action="#">
+					<p><strong>Choose colors:</strong></p>
+					<p>Select all colors</p>  			
+				  <div id="{{i}}" *ngFor="let color of variantColors; index as i" value="Bike" style="background-color:{{color}}; height: 20px; width: 30px; margin: 2px; float: left; border-radius: 3px; cursor: pointer;" (click)="switchVariant('NULL', color,'NULL')">
+				  </div>
+				  <p>Select size(s):</p>
+					<p>Select all sizes</p>
+					<!-- <input type="checkbox" id="{{s}}" name="{{s}}" value="Bike" > -->
+				  <!-- <label for="vehicle1"> I have a bike</label><br> -->
+
+				  <div class="form-check" *ngFor="let size of variantSizes; index as s" style="float: left; margin-right: 5px;">
+					  <input class="form-check-input" type="checkbox" value="" id="{{s}}" name="{{s}}" (mouseup)="switchVariant('NULL', 'NULL',size)">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    {{size}}
+					  </label>
+					</div>
+					
+				</form>
+				<div class="row">
+					<div class="col-md-12" style="margin-top: 30px;">
+						<h2 style="font-size: 16px; font-weight: 700;">Design image transparency</h2>
+						<div style="background: #F1F1F1; margin: 10px 0; padding: 20px; border-radius: 10px; border: 1px solid #ccc;">
+							<div class="form-check form-switch">
+							  <input class="form-check-input" type="checkbox" role="switch" id="transparencySwitch" (change)="transparencySwitch($event.target)">
+							  <label class="form-check-label" for="transparencySwitch">Transparent background</label>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-6">
+									<span class="badge rounded-pill text-bg-secondary" style="margin-bottom: 10px;">Original Image</span>
+									<br>
+									<img src="{{asset?.image_url}}" width="100px;" style="background-image: url('/assets/imgs/transparency-bg.webp'); background-size: contain; border: 1px solid #ccc;">
+								</div>
+								<div class="col-md-6">
+									<span class="badge rounded-pill text-bg-secondary" style="margin-bottom: 10px;">Design Image</span>
+									<br>
+										<img #designLoadingEl src="/assets/imgs/loading-slow-net.gif" width="80px" style="display: none;">
+										<img #designImgEl  src="{{designImage}}" width="100px;" style="background-image: url('/assets/imgs/transparency-bg.webp'); background-size: contain; border: 1px solid #ccc;">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12" style="margin: 20px 0 20px 0;">
+						<button class="btn btn-info" style="margin: 10px 10px 0 0;" (click)="generateMockup()">Generate preview</button>
+					</div>
+				</div>
+				<h2 style="font-size: 26px; color: #2C3D63">{{serverData?.result.product.title}}</h2>
+				<p>{{serverData?.result.product.description}}</p>
+				<div class="row">
+					<div class="col-md-12">
+						<ul>
+							<li>Type <span class="badge text-bg-info">{{serverData?.result.product.type}} </span></li>
+							<li>Brand <span class="badge text-bg-info">{{serverData?.result.product.brand}} </span></li>
+							<li>Model <span class="badge text-bg-info">{{serverData?.result.product.model}} </span></li>
+							<!-- <li>Currency {{serverData?.result.product.currency}}</li> -->
+						</ul>
+					</div>
+				</div>
+<!-- 	  		<div class="col-md-6" *ngFor="let variant of templatesData?.result.variant_mapping; index as i" (click)="switchVariant(i)">
+	  			{{variant.variant_id}}
+	  		</div> -->
+	  	</div>
+	  </div>
+	  <div class="col-md-6 col-sm-6">
+	  <div class="row">
+	  	<div class="col-12" style="margin-bottom: 20px;">
+	  		<ul id="templates" class="nav nav-tabs">
+				  <li class="nav-item" *ngFor="let template of templates; index as d" (click)="switchTemplate(template.template_id, d)" style="cursor: pointer;">
+				    <span class="nav-link {{(template.selected == true)? 'active' : ''}}">{{template.placement}}</span>
+				  </li>
+				</ul>
+	  	</div>
+	  </div>
+		<canvas #canvasEl (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)" (mousemove)="onMouseMove($event)" style="background: #f5f5f5; border: 1px solid #ccc"></canvas>
+	  </div>
+	</div>
+</div>
